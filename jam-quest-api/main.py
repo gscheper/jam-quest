@@ -28,7 +28,7 @@ def index():
 
 @app.route('/login')
 def login():
-    return auth_url
+    return redirect(auth_url)
 
 @app.route('/playback/state')
 def playback():
@@ -49,7 +49,7 @@ def callback():
                                          "content-type":"application/x-www-form-urlencoded",
                                          "Authorization":"Basic " + base64.b64encode((str(client_ID)+":"+str(client_SC)).encode("ascii")).decode("ascii")})
         session["access_token"] = auth_request.json()["access_token"]
-        return str(session["access_token"])
+        return redirect("http://localhost:5173/admin.html")
 
 if __name__ == '__main__':
     #init()
