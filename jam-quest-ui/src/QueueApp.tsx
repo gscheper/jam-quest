@@ -1,8 +1,10 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import 'bootstrap/dist/css/bootstrap.css'
-import ToggleWithText from './components/ToggleWithText'
+import App from './Queue.tsx'
 
 createRoot(document.getElementById('root')!).render(
-    <StrictMode></StrictMode>,
-    )
+  <StrictMode>
+    <App />
+  </StrictMode>,
+)
