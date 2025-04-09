@@ -14,12 +14,12 @@ function RouteButton({text, route} : {text:string, route:string}) {
     );
 }
 
-function PumpUpTheJam({text} : {text:string}) {
-    const MakeRequest = () => axios({url:'http://localhost:5000/playback/add', 
-                                params:{"uri":"spotify%3Atrack%3A21qnJAMtzC6S5SESuqQLEK"}})
-                                .catch(function (error) {
-                                    console.log(error);
-                                });
+function PumpUpTheJam() {
+    var MakeRequest = () => {
+        axios({url:'http://localhost:5000/playback/add', 
+            params: {"uri":'spotify:track:21qnJAMtzC6S5SESuqQLEK'}})
+                .catch(function (error) {console.log(error);});
+    };
 
     return(
         <>
@@ -27,7 +27,7 @@ function PumpUpTheJam({text} : {text:string}) {
             <button 
                 type="button" 
                 className="btn btn-primary" 
-                onClick={ MakeRequest }>{ text }
+                onClick={ () => MakeRequest() }> Pump Up The Jam
             </button>
         </div> 
         </>

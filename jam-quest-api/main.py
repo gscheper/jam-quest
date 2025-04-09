@@ -44,7 +44,6 @@ def search():
     make_request = requests.get("https://api.spotify.com/v1/search", 
                                  headers={"Authorization":"Bearer "+AccessAuthorization["access_token"]},
                                  params={"q":request.args.get('q'),"type":"track","limit":"5"})
-    
     return make_request.json()['tracks']
 
 @app.route('/playback/add')
@@ -53,7 +52,6 @@ def add():
     make_request = requests.post("https://api.spotify.com/v1/me/player/queue", 
                                  headers={"Authorization":"Bearer "+AccessAuthorization["access_token"]},
                                  params={"uri":request.args.get('uri')})
-    print(make_request)
     return 'Success!', 200
 
 @app.route('/callback')

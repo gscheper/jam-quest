@@ -5,7 +5,7 @@ function Queue() {
     return (
         <>
             <div>
-                <PumpUpTheJam text="Pump Up The Jam"/>
+                <PumpUpTheJam/>
             </div>
             <div>
                 <SongForm/>

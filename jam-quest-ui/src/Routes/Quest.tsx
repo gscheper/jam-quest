@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useState } from 'react';
 
 function Quest() {
@@ -12,7 +13,9 @@ function Quest() {
 
     const HandleAnswer = () => {
         if (Answer===games[Index][1]) {
-            window.location.href = "http://localhost:5173/queue";
+            axios({url:'http://localhost:5000/user/king'})
+                    .then(function () {})//window.location.href = "http://localhost:5173/queue";
+                    .catch(function (error) {console.log(error);});
         }
     }
 

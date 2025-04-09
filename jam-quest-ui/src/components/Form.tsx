@@ -18,10 +18,9 @@ function SongForm() {
     };
 
     const AddSong = () => {
-        axios({url: 'http://localhost:5000/playback/add', params: {"uri":TopSong}})
-                                .catch(function (error) {
-                                    console.log(error);
-                                });
+        axios({url: 'http://localhost:5000/playback/add', 
+            params: {"uri":TopSong}})
+                .catch(function (error) {console.log(error);});//window.location.href="/quest"
     };
     
     return(
