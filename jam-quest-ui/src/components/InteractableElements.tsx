@@ -14,12 +14,9 @@ function RouteButton({text, route} : {text:string, route:string}) {
     );
 }
 
-function RequestButton({text} : {text:string}) {
-    //console.log(encodeURI("remaster track Doxy artist Miles Davis"));
-    const MakeRequest = () => axios.get('http://localhost:5000/playback/pump_up_the_jam')
-                                .then(function (response) {
-                                    console.log(response);
-                                })
+function PumpUpTheJam({text} : {text:string}) {
+    const MakeRequest = () => axios({url:'http://localhost:5000/playback/add', 
+                                params:{"uri":"spotify%3Atrack%3A21qnJAMtzC6S5SESuqQLEK"}})
                                 .catch(function (error) {
                                     console.log(error);
                                 });
@@ -37,4 +34,4 @@ function RequestButton({text} : {text:string}) {
     );
 }
 
-export {RequestButton, RouteButton};
+export {PumpUpTheJam, RouteButton};
