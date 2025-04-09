@@ -43,18 +43,20 @@ def refresh_token():
             return refresh_request.json()["error"], 500
     return 'Success', 200
 
-@app.route('/login')
+@app.route('/login', methods=['GET'])
 def login():
     '''
     Immediately redirects user to spotify authentication website.
     '''
+    if request.method != 'GET':
+        return 'Method Not Allowed', 405
     return redirect('https://accounts.spotify.com/authorize?' + urllib.parse.urlencode({
                     'response_type': 'code',
                     'client_id': client_ID,
                     'scope': 'streaming user-read-private',
                     'redirect_uri': 'http://localhost:5000/callback'}))
 
-@app.route('/playback/search')
+@app.route('/playback/search', methods=['GET'])
 def search():
     '''
     Searches for the first 5 songs that appear when the query [q] is made.
@@ -68,6 +70,8 @@ def search():
           Description: Query was made successfully, returns json with list of 
           tracks among other information
     '''
+    if request.method != 'GET':
+        return 'Method Not Allowed', 405
     refresh_token()
     search_request = requests.get("https://api.spotify.com/v1/search", 
                                   headers={
@@ -78,7 +82,7 @@ def search():
                                       "limit":"5"})
     return search_request.json()['tracks'], 200
 
-@app.route('/playback/add')
+@app.route('/playback/add', methods=['POST'])
 def add():
     '''
     Forms request to spotify API to add a song to the queue. 
@@ -91,6 +95,8 @@ def add():
         200:
           description: song was added successfully
     '''
+    if request.method != 'POST':
+        return 'Method Not Allowed', 405
     refresh_token()
     add_request = requests.post("https://api.spotify.com/v1/me/player/queue", 
                                 headers={
@@ -99,7 +105,7 @@ def add():
                                     "uri":request.args.get('uri')})
     return 'Success!', 200
 
-@app.route('/callback')
+@app.route('/callback', methods=['GET'])
 def callback():
     '''
     Callback function for Spotify Web API authentication. Makes a request for
@@ -107,6 +113,8 @@ def callback():
     refresh token, and expiration time) in a global dictionary. Redirects to 
     frontend admin page on success, redirect to frontend root page on failure.
     '''
+    if request.method != 'GET':
+        return 'Method Not Allowed', 405
     if 'error' in request.args:
         return redirect("http://localhost:5173")
     else:
@@ -119,7 +127,7 @@ def callback():
                                          "redirect_uri": "http://localhost:5000/callback"},
                                      headers={
                                          "content-type":"application/x-www-form-urlencoded",
-                                         "Authoriation":"Basic " + auth_code})
+                                         "Authorization":"Basic " + base64.b64encode((str(client_ID)+":"+str(client_SC)).encode("ascii")).decode("ascii")})
         
         # Store authorization information
         AccessAuthorization["access_token"] = auth_request.json()["access_token"]
