@@ -1,4 +1,4 @@
-# jam_quest
+# jam-quest
 
 ## Description
 
