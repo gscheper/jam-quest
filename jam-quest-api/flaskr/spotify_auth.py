@@ -3,13 +3,13 @@ import base64
 from flask import Blueprint, request, redirect
 from datetime import timedelta, datetime
 import requests
-from . import db
+from .utils import load_data, save_data
 
 bp = Blueprint('spotify_auth', __name__, url_prefix='/spotify_auth')
 
 @bp.route('/stub')
 def stub():
-    auth = db.load_data()
+    auth = load_data()
     print(auth)
     return auth, 200
 
@@ -27,7 +27,7 @@ def callback():
         return redirect("http://localhost:5173")
     else:
         # Make request
-        auth = db.load_data()
+        auth = load_data()
         print(auth)
         #auth_code = base64.b64encode((str(g.client_ID)+":"+str(g.client_SC)).encode("ascii")).decode("ascii")
         auth_request = requests.post("https://accounts.spotify.com/api/token", 
@@ -44,7 +44,7 @@ def callback():
         auth["refresh_token"] = auth_request.json()["refresh_token"]
         auth["expiration_time"] = str(datetime.now() + timedelta(seconds=auth_request.json()["expires_in"]))
         print(auth)
-        db.save_data(auth)
+        save_data(auth)
         
         return redirect("http://localhost:5173/admin")
 
@@ -55,7 +55,7 @@ def login():
     '''
     if request.method != 'GET':
         return 'Method Not Allowed', 405
-    auth = db.load_data()
+    auth = load_data()
     return redirect('https://accounts.spotify.com/authorize?' + urllib.parse.urlencode({
                     'response_type': 'code',
                     'client_id': auth['client_ID'],

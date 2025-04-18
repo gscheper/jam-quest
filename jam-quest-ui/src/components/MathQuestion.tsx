@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import axios from "axios";
 
 function MathQuestion() {
+    axios({url:'http://localhost:5000/quest'})
     const games = [
         ["2 + 2", "4"],
         ["2 + 3", "5"],

@@ -2,7 +2,7 @@ import base64
 from datetime import datetime
 import requests
 from flask import Blueprint, request
-from . import db
+from .utils import load_data
 
 bp = Blueprint('playback', __name__, url_prefix='/playback')
 
@@ -11,7 +11,7 @@ def refresh_token():
     Helper function for refreshing the spotify authorization token, which 
     expires every hour.
     '''
-    auth = db.load_data()
+    auth = load_data()
     if (auth["expiration_time"] <= datetime.now()):
         auth_code = base64.b64encode((auth['client_ID']+":"+auth['client_SC']).encode("ascii")).decode("ascii")
         refresh_request = requests.post("https://api.spotify.com/api/token",
@@ -42,7 +42,7 @@ def search():
     if request.method != 'GET':
         return 'Method Not Allowed', 405
     refresh_token()
-    auth = db.load_data()
+    auth = load_data()
     search_request = requests.get("https://api.spotify.com/v1/search", 
                                   headers={
                                       "Authorization":"Bearer "+auth["access_token"]},
@@ -68,7 +68,7 @@ def add():
     if request.method != 'POST':
         return 'Method Not Allowed', 405
     refresh_token()
-    auth = db.load_data()
+    auth = load_data()
     print(auth)
     requ = requests.post("https://api.spotify.com/v1/me/player/queue", 
                                 headers={
