@@ -8,7 +8,7 @@ function SongForm() {
         if (input === "") {
             return;
         }
-        axios({url: 'http://localhost:5000/playback/search', params: {"q":encodeURI(input)}})
+        axios({url: 'http://localhost:5000/search', params: {"q":encodeURI(input)}})
                                 .then(function (response) {
                                     SetTopSong(response.data['items'][0]['uri']);
                                 })
@@ -18,8 +18,9 @@ function SongForm() {
     };
 
     const AddSong = () => {
-        axios({url: 'http://localhost:5000/playback/add', 
-            params: {"uri":TopSong}})
+        axios({url: 'http://localhost:5000/add', 
+               params: {"uri":TopSong},
+               method: 'post'})
                 .catch(function (error) {console.log(error);});//window.location.href="/quest"
     };
     
