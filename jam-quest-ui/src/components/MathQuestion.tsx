@@ -1,8 +1,13 @@
 import { useState } from 'react';
 import axios from "axios";
+axios.defaults.withCredentials=true;
+axios.defaults.headers.get['Content-Type'] ='application/x-www-form-urlencoded';
+axios.defaults.headers.get['Access-Control-Allow-Credentials'] ='include';
 
 function MathQuestion() {
-    axios({url:'http://localhost:5000/quest'})
+    axios({url:'http://localhost:5000/quest', 
+           method:"get"})
+            .then(function (response) {console.log(response);})
     const games = [
         ["2 + 2", "4"],
         ["2 + 3", "5"],
