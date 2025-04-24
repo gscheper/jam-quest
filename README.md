@@ -23,8 +23,8 @@ cd jam-quest-ui && npm run dev && cd ..
 ```
 
 ## To-Do
-- [ ] Code cleanup
+- [ ] Backend code cleanup
 - [ ] Integrate MongoDB
-- [ ] Frontend cleanup
+- [ ] Frontend code cleanup
 - [ ] Dockerize
 - [ ] Confirm sessions work as intended
