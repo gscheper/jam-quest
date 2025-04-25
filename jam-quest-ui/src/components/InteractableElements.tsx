@@ -17,7 +17,9 @@ function RouteButton({text, route} : {text:string, route:string}) {
 function PumpUpTheJam() {
     var MakeRequest = () => {
         axios({url:'http://localhost:5000/playback/add', 
-            params: {"uri":'spotify:track:21qnJAMtzC6S5SESuqQLEK'}, method: 'post'})
+            params: {"uri":'spotify:track:21qnJAMtzC6S5SESuqQLEK'}, 
+            method: 'post',
+            withCredentials: false})
                 .catch(function (error) {console.log(error);});
     };
 

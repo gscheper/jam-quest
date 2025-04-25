@@ -1,11 +1,16 @@
 import axios from "axios";
+axios.defaults.withCredentials=true;
+axios.defaults.headers.get['Content-Type'] ='application/x-www-form-urlencoded';
+axios.defaults.headers.get['Access-Control-Allow-Credentials'] ='include';
 
 function RedirToQuest() {
     var MakeRequest = () => {
         axios({url:'http://localhost:5000/quest/king', 
-               method: 'get'})
+               method: 'get',
+               })
                 .then(function (response) {
-                    if (response.data['king'] != 1) {
+                    console.log(typeof response.data['king'])
+                    if (response.data['king'] === false) {
                         window.location.href = "/quest";
                     }
                     })
@@ -13,6 +18,7 @@ function RedirToQuest() {
     };
 
     MakeRequest();
+    return (<></>);
 }
   
 export default RedirToQuest;

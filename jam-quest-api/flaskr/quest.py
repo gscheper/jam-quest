@@ -7,7 +7,6 @@ bp = Blueprint('quest', __name__, url_prefix='/quest')
 def question():
     if request.method == 'OPTIONS':
         response = jsonify({"message": "Works"})
-        #response.headers['Access-Control-Allow-Origin'] = 'http://localhost:5173'
         response.headers['Access-Control-Allow-Credentials'] = 'true'
         return response
     if 'id' not in session:
@@ -18,23 +17,29 @@ def question():
         print(session['id'])
     else:
         return 'Method Not Allowed', 405
-    
     response = jsonify({"message": "Works"})
-    #response.headers['Access-Control-Allow-Origin'] = 'http://localhost:5173'
     response.headers['Access-Control-Allow-Credentials'] = 'true'
     return response
 
-@bp.route('/king', methods=['GET','POST'])
+@bp.route('/king', methods=['GET','POST', 'OPTIONS'])
 def king():
     auth = load_data()
+    if request.method == 'OPTIONS':
+        response = jsonify({"message": "Works"})
+        response.headers['Access-Control-Allow-Credentials'] = 'true'
+        return response
     if request.method == 'GET':
-        print(auth['king'])
-        response = jsonify({"king": auth['king']})
-        #response.headers.add('Access-Control-Allow-Origin', '*')
-        #response.headers.add('Access-Control-Allow-Credentials', 'true')
+        response = jsonify({"king": False})
+        if 'id' in session:
+            print(auth['king'])
+            print(session['id'])
+            response = jsonify({"king": auth['king']==session['id']})
+        response.headers['Access-Control-Allow-Credentials'] = 'true'
         return response
     elif request.method == 'POST':
-        auth["king"] = 1
+        auth["king"] = session['id']
         save_data(auth)
-        return 'Success', 200
+        response = jsonify({"message": "success"})
+        response.headers['Access-Control-Allow-Credentials'] = 'true'
+        return response
     return 'Method Not Allowed', 405

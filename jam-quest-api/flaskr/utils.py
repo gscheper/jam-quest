@@ -18,7 +18,6 @@ def load_data():
     auth = db["authorization"]
 
     result = auth.find_one({"_id":"0"})
-    result["expiration_time"] = datetime.strptime(result["expiration_time"], "%Y-%m-%d %H:%M:%S.%f")
     result["id_iter"] = int(result["id_iter"])
     result["king"] = int(result["king"])
 

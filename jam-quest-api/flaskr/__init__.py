@@ -18,7 +18,7 @@ def init_db():
     info["_id"] = "0"
     info["access_token"] = ""
     info["refresh_token"] = ""
-    info["expiration_time"] = str(datetime.now())
+    info["expiration_time"] = datetime.now()
     info["client_SC"] = os.getenv('CLIENT_SC')
     info["client_ID"] = os.getenv('CLIENT_ID')
     info["id_iter"] = "0"

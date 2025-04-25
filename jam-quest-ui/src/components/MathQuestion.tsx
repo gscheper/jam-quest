@@ -18,7 +18,11 @@ function MathQuestion() {
     var Index = useState(Math.floor(games.length * Math.random()))[0];
 
     const HandleAnswer = () => {
-        if (Answer===games[Index][1]) {window.location.href = "http://localhost:5173/queue"}
+        if (Answer===games[Index][1]) {
+            axios({url:'http://localhost:5000/quest/king',
+                method:'post'
+            }).then(function () {window.location.href = "http://localhost:5173/queue"})
+        }
     }
 
     return (
