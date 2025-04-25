@@ -1,33 +1,28 @@
 from datetime import datetime
+from pymongo import MongoClient
 
-def save_data(result):
-    with open("tempdb/AUTHORIZATION.txt", "w") as file:
-        file.write(result["access_token"] + "\n")
-        file.write(result["refresh_token"] + "\n")
-        file.write(str(result["expiration_time"]) + "\n")
-        file.write(result["client_SC"] + "\n")
-        file.write(result["client_ID"] + "\n")
-        file.write(str(result["id_iter"]) + "\n")
-        file.write(str(result["king"]))
+def save_data(change):
+    uri = "mongodb://localhost:27017/"
+    client = MongoClient(uri)
+    db = client["test_database"]
+    auth = db["authorization"]
+
+    auth.update_one({"_id":"0"}, {"$set":change}, upsert=False)
+
+    client.close()
 
 def load_data():
-    result = {"access_token":"",
-              "refresh_token":"",
-              "expiration_time":datetime.today(),
-              "client_ID":"",
-              "client_SC":"",
-              "id_iter":0,
-              "king":-1}
-    
-    with open("tempdb/AUTHORIZATION.txt", "r") as file:
-        result["access_token"] = file.readline()[:-1]
-        result["refresh_token"] = file.readline()[:-1]
-        result["expiration_time"] = datetime.strptime(file.readline()[:-1], "%Y-%m-%d %H:%M:%S.%f")
-        result["client_SC"] = file.readline()[:-1]
-        result["client_ID"] = file.readline()[:-1]
-        result["id_iter"] = int(file.readline()[:-1])
-        result["king"] = int(file.readline())
+    uri = "mongodb://localhost:27017/"
+    client = MongoClient(uri)
+    db = client["test_database"]
+    auth = db["authorization"]
 
+    result = auth.find_one({"_id":"0"})
+    result["expiration_time"] = datetime.strptime(result["expiration_time"], "%Y-%m-%d %H:%M:%S.%f")
+    result["id_iter"] = int(result["id_iter"])
+    result["king"] = int(result["king"])
+
+    client.close()
     return result
 
 def generate_key():
