@@ -44,7 +44,7 @@ def create_app():
 
     init_db()
     atexit.register(reset_db)
-
+    
     app.register_blueprint(spotify_auth.bp)
     app.register_blueprint(playback.bp)
     app.register_blueprint(quest.bp)

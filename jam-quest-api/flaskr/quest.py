@@ -1,5 +1,6 @@
 from flask import Blueprint, request, session, jsonify
-from .utils import generate_key, load_data, save_data
+from .utils import generate_key, load_data, save_data, get_all_questions, check_if_correct
+import random
 
 bp = Blueprint('quest', __name__, url_prefix='/quest')
 
@@ -9,17 +10,27 @@ def question():
         response = jsonify({"message": "Works"})
         response.headers['Access-Control-Allow-Credentials'] = 'true'
         return response
+    
     if 'id' not in session:
         session['id'] = generate_key()
+
     if request.method == 'GET':
-        print(session['id'])
+        questions = get_all_questions()
+        response = jsonify({
+            "message": "Works", 
+            "Quest": questions[random.randint(0, len(questions)-1)]
+            })
+        return response
+    
     elif request.method == 'POST':
-        print(session['id'])
+        response = jsonify({
+            "message": "Works", 
+            "Check": check_if_correct(request.headers.get('Quest'), request.headers.get('Answer'))
+            })
+        return response
+    
     else:
         return 'Method Not Allowed', 405
-    response = jsonify({"message": "Works"})
-    response.headers['Access-Control-Allow-Credentials'] = 'true'
-    return response
 
 @bp.route('/king', methods=['GET','POST', 'OPTIONS'])
 def king():
