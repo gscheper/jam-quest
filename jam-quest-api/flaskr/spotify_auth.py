@@ -28,8 +28,7 @@ def callback():
     else:
         # Make request
         auth = load_data()
-        print(auth)
-        #auth_code = base64.b64encode((str(g.client_ID)+":"+str(g.client_SC)).encode("ascii")).decode("ascii")
+        auth_code = base64.b64encode((auth["client_ID"]+":"+auth["client_SC"]).encode("ascii")).decode("ascii")
         auth_request = requests.post("https://accounts.spotify.com/api/token", 
                                      data={
                                          "grant_type":"authorization_code",
@@ -37,7 +36,7 @@ def callback():
                                          "redirect_uri": "http://localhost:5000/spotify_auth/callback"},
                                      headers={
                                          "content-type":"application/x-www-form-urlencoded",
-                                         "Authorization":"Basic " + base64.b64encode((auth["client_ID"]+":"+auth["client_SC"]).encode("ascii")).decode("ascii")})
+                                         "Authorization":"Basic " + auth_code})
         
         # Store authorization information
         auth["access_token"] = auth_request.json()["access_token"]
