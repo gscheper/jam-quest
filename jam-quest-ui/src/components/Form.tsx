@@ -28,12 +28,16 @@ function SongForm() {
         <>
             <form>
                 <label>
-                    <input type="text" name="UserInput" onChange={ e => UpdateList(e.target.value) }/>
+                    <input 
+                        type="text" 
+                        name="UserInput" 
+                        onChange={ e => UpdateList(e.target.value) }
+                        className='form'/>
                 </label>
             </form>
             <button 
                 type="button" 
-                className="btn btn-primary" 
+                className="btn btn-primary queue-button" 
                 onClick={ () => AddSong() }>Add to Queue
             </button>
         </>

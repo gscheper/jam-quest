@@ -1,6 +1,5 @@
-import { RouteButton } from "./components/InteractableElements";
-import { NavLink } from 'react-router-dom';
 import Main from './Main';
+import './App.css';
 
 function App() {
   return (

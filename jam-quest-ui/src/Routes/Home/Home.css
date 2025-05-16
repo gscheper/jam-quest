@@ -1,0 +1,27 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    height: 75vh;
+
+    justify-content: center;
+    align-content: center;
+
+    justify-items: center;
+    align-items: center;
+}
+
+.logo {
+    width: 25vw;
+    height: 25vh;
+}
+
+.button {
+    width: 25vw;
+    background-color: #FF0000;
+    border-color: #0000FF;
+}
+
+.button:hover {
+    background-color: #0000FF;
+    border-color: #FF0000;
+}

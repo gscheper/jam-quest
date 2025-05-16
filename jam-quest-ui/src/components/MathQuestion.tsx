@@ -26,13 +26,11 @@ function MathQuestion() {
     }
 
     return (
-        <>
-            <div className="mb-3">
-                <label className="form-label">{games[Index][0]}</label>
-                <input type="text" name="UserInput" className="form-control" onChange={e => SetAnswer(e.target.value)}/>
-                <button className="btn btn-primary" type="submit" onClick={() => HandleAnswer()} >Submit</button>
-            </div>
-        </>
+    <div className="mb-3 Quest">
+        <label className="form-label quest-text">{games[Index][0]}</label>
+        <input type="text" name="UserInput quest-form" className="form-control" onChange={e => SetAnswer(e.target.value)}/>
+        <button className="btn btn-primary quest-submit" type="submit" onClick={() => HandleAnswer()} >Submit</button>
+    </div>
     );
   }
   

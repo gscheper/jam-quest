@@ -1,0 +1,28 @@
+.queue-grid {
+    display: grid;
+    height: 50vh;
+
+    grid-template-columns: 12.5vw 12.5vw;
+
+    justify-content: center;
+    align-content: center;
+}
+
+.form {
+    grid-row: 1;
+    grid-column: 2;
+    width: 25vw;
+}
+
+.queue-button {
+    grid-row: 2;
+    width: 12.5vw;
+
+    background-color: #FF0000;
+    border-color: #0000FF;
+}
+
+.queue-button:hover {
+    background-color: #0000FF;
+    border-color: #FF0000;
+}

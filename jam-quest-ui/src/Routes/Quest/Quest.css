@@ -1,0 +1,29 @@
+.Quest {
+    display: grid;
+    height: 75vh;
+
+    justify-content: center;
+    align-content: center;
+
+    justify-items: center;
+    align-items: center;
+}
+
+.quest-text {
+    color: #0000FF;
+}
+
+.quest-form {
+
+}
+
+.quest-submit {
+    width: 25vw;
+    background-color: #FF0000;
+    border-color: #0000FF;
+}
+
+.quest-submit:hover {
+    background-color: #0000FF;
+    border-color: #FF0000;
+}

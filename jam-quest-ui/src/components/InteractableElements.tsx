@@ -1,16 +1,13 @@
 import axios from "axios";
 
-function RouteButton({text, route} : {text:string, route:string}) {
+function RouteButton({text, route, className} : {text:string, route:string, className:string}) {
     return(
-        <>
-        <div>
-            <button 
-                type="button" 
-                className="btn btn-primary" 
-                onClick={ () => window.location.href = route }>{ text }
-            </button>
-        </div> 
-        </>
+        <button 
+            type="button" 
+            className={"btn btn-primary " + className }
+            onClick={ () => window.location.href = route }>
+                { text }
+        </button>
     );
 }
 
@@ -25,13 +22,12 @@ function PumpUpTheJam() {
 
     return(
         <>
-        <div>
-            <button 
-                type="button" 
-                className="btn btn-primary" 
-                onClick={ () => MakeRequest() }> Pump Up The Jam
-            </button>
-        </div> 
+        <button 
+        type="button" 
+                className="btn btn-primary queue-button" 
+                onClick={ () => MakeRequest() }> 
+                    Pump Up The Jam
+                    </button>
         </>
     );
 }
