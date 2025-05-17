@@ -24,7 +24,7 @@ function PumpUpTheJam() {
         <>
         <button 
         type="button" 
-                className="btn btn-primary queue-button" 
+                className="btn btn-primary button queue-button" 
                 onClick={ () => MakeRequest() }> 
                     Pump Up The Jam
                     </button>

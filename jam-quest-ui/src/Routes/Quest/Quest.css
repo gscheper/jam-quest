@@ -1,29 +1,18 @@
-.Quest {
-    display: grid;
-    height: 75vh;
-
-    justify-content: center;
-    align-content: center;
-
-    justify-items: center;
-    align-items: center;
-}
-
 .quest-text {
-    color: #0000FF;
+    color: var(--tertiary-color);
 }
 
 .quest-form {
 
 }
 
-.quest-submit {
+.quest-button {
     width: 25vw;
-    background-color: #FF0000;
-    border-color: #0000FF;
+    background-color: var(--secondary-color);
+    border-color: var(--tertiary-color);
 }
 
-.quest-submit:hover {
-    background-color: #0000FF;
-    border-color: #FF0000;
+.quest-button:hover {
+    background-color: var(--tertiary-color);
+    border-color: var(--secondary-color);
 }

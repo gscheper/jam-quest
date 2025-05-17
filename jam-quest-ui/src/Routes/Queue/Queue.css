@@ -17,12 +17,11 @@
 .queue-button {
     grid-row: 2;
     width: 12.5vw;
-
-    background-color: #FF0000;
-    border-color: #0000FF;
+    background-color: var(--secondary-color);
+    border-color: var(--tertiary-color);
 }
 
 .queue-button:hover {
-    background-color: #0000FF;
-    border-color: #FF0000;
+    background-color: var(--tertiary-color);
+    border-color: var(--secondary-color);
 }

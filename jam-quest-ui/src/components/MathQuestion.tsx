@@ -26,10 +26,10 @@ function MathQuestion() {
     }
 
     return (
-    <div className="mb-3 Quest">
+    <div className="mb-3 grid-container">
         <label className="form-label quest-text">{games[Index][0]}</label>
         <input type="text" name="UserInput quest-form" className="form-control" onChange={e => SetAnswer(e.target.value)}/>
-        <button className="btn btn-primary quest-submit" type="submit" onClick={() => HandleAnswer()} >Submit</button>
+        <button className="btn btn-primary quest-button" type="submit" onClick={() => HandleAnswer()} >Submit</button>
     </div>
     );
   }
