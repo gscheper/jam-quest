@@ -13,6 +13,7 @@
 }
 
 .quest-button:hover {
-    background-color: var(--tertiary-color);
-    border-color: var(--secondary-color);
+    background-color: var(--secondary-color);
+    border-color: var(--tertiary-color);
+    filter: brightness(85%);
 }

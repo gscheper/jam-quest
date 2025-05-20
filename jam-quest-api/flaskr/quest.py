@@ -35,6 +35,7 @@ def question():
         response = jsonify({})
         response.headers['Access-Control-Allow-Credentials'] = 'true'
         return response
+    
     if 'id' not in session:
         session['id'] = generate_key()
     if request.method == 'GET':
@@ -43,18 +44,22 @@ def question():
             "Quest": questions[random.randint(0, len(questions)-1)]})
         response.headers['Access-Control-Allow-Credentials'] = 'true'
         return response
+    
     elif request.method == 'POST':
         if 'Quest' not in request.args:
             return 'Question [Quest] not in body', 400
         if 'Answer' not in request.args:
             return 'Answer [Answer] not in body', 400
-        response = jsonify({"Check": check_if_correct(request.args.get('Quest'), request.args.get('Answer'))})
-        if response["Check"]:
+        
+        check = check_if_correct(request.args.get('Quest'), request.args.get('Answer'))
+        response = jsonify({"Check": check})
+        if check:
             auth = load_data()
             auth["king"] = session['id']
             save_data(auth)
         response.headers['Access-Control-Allow-Credentials'] = 'true'
         return response
+    
     else:
         return 'Method Not Allowed', 405
 
