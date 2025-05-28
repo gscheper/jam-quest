@@ -82,8 +82,6 @@ def king():
     if request.method == 'GET':
         response = jsonify({"king": False})
         if 'id' in session:
-            print(auth['king'])
-            print(session['id'])
             response = jsonify({"king": auth['king']==session['id']})
         response.headers['Access-Control-Allow-Credentials'] = 'true'
         return response

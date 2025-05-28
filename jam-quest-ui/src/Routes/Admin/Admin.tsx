@@ -1,7 +1,7 @@
 function Admin() {
   return (
         <div>
-            Youre' mom
+            You've reached the admin page
         </div>
     );
 }

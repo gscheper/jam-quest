@@ -10,7 +10,6 @@ bp = Blueprint('spotify_auth', __name__, url_prefix='/spotify_auth')
 @bp.route('/stub')
 def stub():
     auth = load_data()
-    print(auth)
     return auth, 200
 
 @bp.route('/callback', methods=['GET'])
@@ -42,7 +41,6 @@ def callback():
         auth["access_token"] = auth_request.json()["access_token"]
         auth["refresh_token"] = auth_request.json()["refresh_token"]
         auth["expiration_time"] = datetime.now() + timedelta(seconds=auth_request.json()["expires_in"])
-        print(auth)
         save_data(auth)
         
         return redirect("http://localhost:5173/admin")

@@ -2,15 +2,17 @@ import { useState } from 'react';
 import axios from "axios";
 
 function SongForm() {
-    var [TopSong, SetTopSong] = useState("spotify%3Atrack%3A21qnJAMtzC6S5SESuqQLEK");
+    var [TopSong, SetTopSong] = useState("spotify:track:21qnJAMtzC6S5SESuqQLEK");
 
     const UpdateList = (input:string) => {
         if (input === "") {
             return;
         }
-        axios({url: 'http://localhost:5000/search', params: {"q":encodeURI(input)}})
+        axios({url: 'http://localhost:5000/playback/search', 
+            params: {"q":encodeURI(input)},
+            method:'GET'})
                                 .then(function (response) {
-                                    SetTopSong(response.data['items'][0]['uri']);
+                                    SetTopSong(response.data.data.items[0].uri);
                                 })
                                 .catch(function (error) {
                                     console.log(error);
@@ -18,9 +20,9 @@ function SongForm() {
     };
 
     const AddSong = () => {
-        axios({url: 'http://localhost:5000/add', 
+        axios({url: 'http://localhost:5000/playback/add', 
                params: {"uri":TopSong},
-               method: 'post'})
+               method: 'POST'})
                 .catch(function (error) {console.log(error);});//window.location.href="/quest"
     };
     
