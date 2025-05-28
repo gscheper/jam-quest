@@ -1,5 +1,5 @@
 import SongForm from "../../components/Form";
-import { PumpUpTheJam } from "../../components/InteractableElements";
+import PumpUpTheJam from "../../components/PumpUpTheJam";
 import RedirToQuest from "../../components/RedirToQuest";
 import './Queue.css';
 

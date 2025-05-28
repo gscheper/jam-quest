@@ -1,4 +1,4 @@
-import { RouteButton } from "../../components/InteractableElements";
+import RouteButton from "../../components/RouteButton";
 import './Home.css'
 
 function Home() {
