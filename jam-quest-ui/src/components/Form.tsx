@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from "axios";
+import PumpUpTheJam from './PumpUpTheJam';
 
 function SongForm() {
     var [TopSong, SetTopSong] = useState("spotify:track:21qnJAMtzC6S5SESuqQLEK");
@@ -37,11 +38,14 @@ function SongForm() {
                         className='form'/>
                 </label>
             </form>
-            <button 
-                type="button" 
-                className="btn btn-primary queue-button" 
-                onClick={ () => AddSong() }>Add to Queue
-            </button>
+            <div>
+                <button 
+                    type="button" 
+                    className="btn btn-primary queue-button" 
+                    onClick={ () => AddSong() }> Add to Queue
+                </button>
+                <PumpUpTheJam/>
+            </div>
         </>
     );
 }

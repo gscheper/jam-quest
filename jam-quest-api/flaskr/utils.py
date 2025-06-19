@@ -1,7 +1,7 @@
 from datetime import datetime
 from pymongo import MongoClient
 import base64
-from os import environ, path, getenv
+from os import environ, path
 import requests
 from dotenv import load_dotenv
 
@@ -165,8 +165,8 @@ def init_db():
     info['access_token'] = ''
     info['refresh_token'] = ''
     info['expiration_time'] = datetime.now()
-    info['client_SC'] = getenv('CLIENT_SC')
-    info['client_ID'] = getenv('CLIENT_ID')
+    info['client_SC'] = environ.get('CLIENT_SC')
+    info['client_ID'] = environ.get('CLIENT_ID')
     info['id_iter'] = '0'
     info['king'] = '-1'
     

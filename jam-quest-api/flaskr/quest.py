@@ -34,6 +34,8 @@ def question():
     if request.method == 'OPTIONS':
         response = jsonify({})
         response.headers['Access-Control-Allow-Credentials'] = 'true'
+        response.headers['Access-Control-Allow-Origin'] = request.headers.get('Origin')
+        response.headers['Access-Control-Allow-Headers'] = "access-control-allow-credentials"
         return response
     
     if 'id' not in session:
@@ -43,6 +45,7 @@ def question():
         response = jsonify({
             "Quest": questions[random.randint(0, len(questions)-1)]})
         response.headers['Access-Control-Allow-Credentials'] = 'true'
+        response.headers['Access-Control-Allow-Origin'] = request.headers.get('Origin')
         return response
     
     elif request.method == 'POST':
@@ -58,6 +61,7 @@ def question():
             auth["king"] = session['id']
             save_data(auth)
         response.headers['Access-Control-Allow-Credentials'] = 'true'
+        response.headers['Access-Control-Allow-Origin'] = request.headers.get('Origin')
         return response
     
     else:
@@ -77,6 +81,9 @@ def king():
     if request.method == 'OPTIONS':
         response = jsonify({"message": "Works"})
         response.headers['Access-Control-Allow-Credentials'] = 'true'
+        response.headers['Access-Control-Allow-Origin'] = request.headers.get('Origin')
+        response.headers['Access-Control-Allow-Headers'] = "access-control-allow-credentials"
+        
         return response
     
     if request.method == 'GET':
@@ -84,6 +91,7 @@ def king():
         if 'id' in session:
             response = jsonify({"king": auth['king']==session['id']})
         response.headers['Access-Control-Allow-Credentials'] = 'true'
+        response.headers['Access-Control-Allow-Origin'] = request.headers.get('Origin')
         return response
     
     return 'Method Not Allowed', 405

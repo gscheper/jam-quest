@@ -1,5 +1,3 @@
-import base64
-from datetime import datetime
 import requests
 from flask import Blueprint, request, jsonify
 from .utils import load_data, refresh_token

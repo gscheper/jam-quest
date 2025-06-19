@@ -1,5 +1,4 @@
 import SongForm from "../../components/Form";
-import PumpUpTheJam from "../../components/PumpUpTheJam";
 import RedirToQuest from "../../components/RedirToQuest";
 import './Queue.css';
 
@@ -8,7 +7,6 @@ function Queue() {
         <div className="queue-grid">
             <RedirToQuest/>
             <SongForm/>
-            <PumpUpTheJam/>
         </div>
     );
 }
