@@ -3,6 +3,7 @@ import base64
 from flask import Blueprint, request, redirect
 from datetime import timedelta, datetime
 import requests
+from os import environ
 from .utils import load_data, save_data
 
 bp = Blueprint('spotify_auth', __name__, url_prefix='/spotify_auth')
@@ -23,27 +24,27 @@ def callback():
     if request.method != 'GET':
         return 'Method Not Allowed', 405
     if 'error' in request.args:
-        return redirect("http://localhost:5173")
+        return redirect('http://' + environ.get('FRONTEND_ENDPOINT') + ':5173')
     else:
         # Make request
         auth = load_data()
-        auth_code = base64.b64encode((auth["client_ID"]+":"+auth["client_SC"]).encode("ascii")).decode("ascii")
-        auth_request = requests.post("https://accounts.spotify.com/api/token", 
+        auth_code = base64.b64encode((auth['client_ID']+':'+auth['client_SC']).encode('ascii')).decode('ascii')
+        auth_request = requests.post('https://accounts.spotify.com/api/token', 
                                      data={
-                                         "grant_type":"authorization_code",
-                                         "code":request.args["code"], 
-                                         "redirect_uri": "http://localhost:5000/spotify_auth/callback"},
+                                         'grant_type':'authorization_code',
+                                         'code':request.args['code'], 
+                                         'redirect_uri': 'http://' + environ.get('BACKEND_ENDPOINT') + ':5000/spotify_auth/callback'},
                                      headers={
-                                         "content-type":"application/x-www-form-urlencoded",
-                                         "Authorization":"Basic " + auth_code})
+                                         'content-type':'application/x-www-form-urlencoded',
+                                         'Authorization':'Basic ' + auth_code})
         
         # Store authorization information
-        auth["access_token"] = auth_request.json()["access_token"]
-        auth["refresh_token"] = auth_request.json()["refresh_token"]
-        auth["expiration_time"] = datetime.now() + timedelta(seconds=auth_request.json()["expires_in"])
+        auth['access_token'] = auth_request.json()['access_token']
+        auth['refresh_token'] = auth_request.json()['refresh_token']
+        auth['expiration_time'] = datetime.now() + timedelta(seconds=auth_request.json()['expires_in'])
         save_data(auth)
         
-        return redirect("http://localhost:5173/admin")
+        return redirect('http://' + environ.get('FRONTEND_ENDPOINT') + ':5173/admin')
 
 @bp.route('/login', methods=['GET'])
 def login():
@@ -57,4 +58,4 @@ def login():
                     'response_type': 'code',
                     'client_id': auth['client_ID'],
                     'scope': 'streaming user-read-private',
-                    'redirect_uri': 'http://localhost:5000/spotify_auth/callback'}))
+                    'redirect_uri': 'http://' + environ.get('BACKEND_ENDPOINT') + ':5000/spotify_auth/callback'}))

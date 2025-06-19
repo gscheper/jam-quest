@@ -1,0 +1,29 @@
+services:
+  react_frontend:
+    container_name: react_frontend
+    hostname: react_frontend
+    build: ./jam-quest-ui
+    ports:
+      - '5173:5173'
+    depends_on:
+      - flask_backend
+
+  flask_backend:
+    container_name: flask_backend
+    hostname: flask_backend
+    build: ./jam-quest-api
+    env_file: 
+      - '.env'
+    ports:
+      - '5000:5000'
+    depends_on: 
+      - mongodb_database 
+  
+  mongodb_database:
+    container_name: mongodb_database
+    hostname: mongodb_database
+    image: mongodb/mongodb-community-server
+    ports:
+      - '27017:27017'
+    expose: 
+      - 27017
