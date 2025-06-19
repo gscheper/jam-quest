@@ -1,5 +1,5 @@
 .queue-grid {
-    display: grid;
+    display: flex;
     height: 50vh;
 
     grid-template-columns: 12.5vw 12.5vw;
