@@ -21,10 +21,3 @@ python jam-quest-api/main.py
 # Start frontend
 cd jam-quest-ui && npm run dev && cd ..
 ```
-
-## To-Do
-- [ ] Backend code cleanup
-- [x] Integrate MongoDB
-- [ ] Frontend code cleanup
-- [ ] Dockerize
-- [x] Confirm sessions work as intended
