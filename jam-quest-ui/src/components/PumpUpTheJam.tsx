@@ -3,7 +3,7 @@ import axios from "axios";
 
 function PumpUpTheJam() {
     var MakeRequest = () => {
-        axios({url:'http://localhost:5000/playback/add', 
+        axios({url:'http://' + import.meta.env.VITE_BACKEND_ENDPOINT + '/playback/add', 
             params: {"uri":'spotify:track:21qnJAMtzC6S5SESuqQLEK'}, 
             method: 'post',
             withCredentials: false})

@@ -9,7 +9,7 @@ function SongForm() {
         if (input === "") {
             return;
         }
-        axios({url: 'http://localhost:5000/playback/search', 
+        axios({url: 'http://' + import.meta.env.VITE_BACKEND_ENDPOINT + '/playback/search', 
             params: {"q":encodeURI(input)},
             method:'GET'})
                                 .then(function (response) {
@@ -21,7 +21,7 @@ function SongForm() {
     };
 
     const AddSong = () => {
-        axios({url: 'http://localhost:5000/playback/add', 
+        axios({url: 'http://' + import.meta.env.VITE_BACKEND_ENDPOINT + '/playback/add', 
                params: {"uri":TopSong},
                method: 'POST'})
                 .catch(function (error) {console.log(error);});//window.location.href="/quest"

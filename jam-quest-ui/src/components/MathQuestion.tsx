@@ -6,16 +6,16 @@ axios.defaults.headers.get['Access-Control-Allow-Credentials'] ='include';
 
 function MathQuestion() {
     const GetQuestion = () => {
-        axios({url:'http://localhost:5000/quest', method:"get"})
+        axios({url:'http://' + import.meta.env.VITE_BACKEND_ENDPOINT + '/quest', method:"get"})
         .then(function (response) {SetQuestion(response.data['Quest']);})
         .catch(function () {SetQuestion("");})
     }
     
     const HandleAnswer = (answer:String) => {
-            axios({url:'http://localhost:5000/quest',
+            axios({url:'http://' + import.meta.env.VITE_BACKEND_ENDPOINT + '/quest',
                 method:'post',
                 params:{'Quest':Question,'Answer':String(answer)}
-            }).then(function () {window.location.href = 'http://localhost:5173/queue';})
+            }).then(function () {window.location.href = 'http://' + import.meta.env.VITE_FRONTEND_ENDPOINT + '/queue';})
             .catch(function (err) {console.log(err)})
     }
     

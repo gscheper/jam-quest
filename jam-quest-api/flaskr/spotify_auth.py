@@ -24,7 +24,7 @@ def callback():
     if request.method != 'GET':
         return 'Method Not Allowed', 405
     if 'error' in request.args:
-        return redirect('http://' + environ.get('FRONTEND_ENDPOINT') + ':5173')
+        return redirect('http://' + environ.get('FRONTEND_ENDPOINT'))
     else:
         # Make request
         auth = load_data()
@@ -33,7 +33,7 @@ def callback():
                                      data={
                                          'grant_type':'authorization_code',
                                          'code':request.args['code'], 
-                                         'redirect_uri': 'http://' + environ.get('BACKEND_ENDPOINT') + ':5000/spotify_auth/callback'},
+                                         'redirect_uri': 'http://' + environ.get('BACKEND_ENDPOINT') + '/spotify_auth/callback'},
                                      headers={
                                          'content-type':'application/x-www-form-urlencoded',
                                          'Authorization':'Basic ' + auth_code})
@@ -44,7 +44,7 @@ def callback():
         auth['expiration_time'] = datetime.now() + timedelta(seconds=auth_request.json()['expires_in'])
         save_data(auth)
         
-        return redirect('http://' + environ.get('FRONTEND_ENDPOINT') + ':5173/admin')
+        return redirect('http://' + environ.get('FRONTEND_ENDPOINT') + '/admin')
 
 @bp.route('/login', methods=['GET'])
 def login():
@@ -58,4 +58,4 @@ def login():
                     'response_type': 'code',
                     'client_id': auth['client_ID'],
                     'scope': 'streaming user-read-private',
-                    'redirect_uri': 'http://' + environ.get('BACKEND_ENDPOINT') + ':5000/spotify_auth/callback'}))
+                    'redirect_uri': 'http://' + environ.get('BACKEND_ENDPOINT') + '/spotify_auth/callback'}))

@@ -30,7 +30,7 @@ def save_data(change):
     '''
     Saves changes to the authentication document
     '''
-    uri = 'mongodb://' + environ.get('DATABASE_ENDPOINT') + ':27017/'
+    uri = 'mongodb://' + environ.get('DATABASE_ENDPOINT')
     client = MongoClient(uri)
     db = client['test_database']
     auth = db['authorization']
@@ -45,7 +45,7 @@ def load_data():
     Returns:
         The python dictionary
     '''
-    uri = 'mongodb://' + environ.get('DATABASE_ENDPOINT') + ':27017/'
+    uri = 'mongodb://' + environ.get('DATABASE_ENDPOINT')
     client = MongoClient(uri)
     db = client['test_database']
     auth = db['authorization']
@@ -74,7 +74,7 @@ def delete_question(question):
     Deletes any document in the question database containing a given question
     '''
     # Connect to database
-    uri = 'mongodb://' + environ.get('DATABASE_ENDPOINT') + ':27017/'
+    uri = 'mongodb://' + environ.get('DATABASE_ENDPOINT')
     client = MongoClient(uri)
     db = client['test_database']
     auth = db['questions']
@@ -91,7 +91,7 @@ def get_all_questions():
         A python array containing each question in the question database
     '''
     # Connect to database
-    uri = 'mongodb://' + environ.get('DATABASE_ENDPOINT') + ':27017/'
+    uri = 'mongodb://' + environ.get('DATABASE_ENDPOINT')
     client = MongoClient(uri)
     db = client['test_database']
     auth = db['questions']
@@ -111,7 +111,7 @@ def save_question(question, answers):
     Saves a question and a list of answers to the question database. 
     '''
     # Connect to database
-    uri = 'mongodb://' + environ.get('DATABASE_ENDPOINT') + ':27017/'
+    uri = 'mongodb://' + environ.get('DATABASE_ENDPOINT')
     client = MongoClient(uri)
     db = client['test_database']
     auth = db['questions']
@@ -134,7 +134,7 @@ def check_if_correct(question, answer):
         True if the question has the corresponding answer, False otherwise.
     '''
     # Connect to database
-    uri = 'mongodb://' + environ.get('DATABASE_ENDPOINT') + ':27017/'
+    uri = 'mongodb://' + environ.get('DATABASE_ENDPOINT')
     client = MongoClient(uri)
     db = client['test_database']
     auth = db['questions']
@@ -154,7 +154,7 @@ def init_db():
     '''
     Initialize an instance of the authentication document in the database
     '''
-    uri = 'mongodb://' + environ.get('DATABASE_ENDPOINT') + ':27017/'
+    uri = 'mongodb://' + environ.get('DATABASE_ENDPOINT')
     client = MongoClient(uri)
     db = client['test_database']
     auth = db['authorization']
@@ -178,7 +178,7 @@ def reset_db():
     '''
     Delete the authenticaiton document, for use at exit
     '''
-    uri = 'mongodb://' + environ.get('DATABASE_ENDPOINT') + ':27017/'
+    uri = 'mongodb://' + environ.get('DATABASE_ENDPOINT')
     client = MongoClient(uri)
     db = client['test_database']
 

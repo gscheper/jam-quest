@@ -5,11 +5,10 @@ axios.defaults.headers.get['Access-Control-Allow-Credentials'] ='include';
 
 function RedirToQuest() {
     var MakeRequest = () => {
-        axios({url:'http://localhost:5000/quest/king', 
+        axios({url:'http://' + import.meta.env.VITE_BACKEND_ENDPOINT + '/quest/king', 
                method: 'get',
                })
                 .then(function (response) {
-                    console.log(typeof response.data['king'])
                     if (response.data['king'] === false) {
                         window.location.href = "/quest";
                     }

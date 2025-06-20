@@ -9,7 +9,7 @@ def create_app():
     # Initalize app
     app = Flask(__name__)
     
-    CORS(app, origins=['http://' + environ.get('FRONTEND_ENDPOINT') + ':5173'])
+    CORS(app, origins=['http://' + environ.get('FRONTEND_ENDPOINT')])
     app.config['SECRET_KEY'] = 'dev' #os.urandom(24)
 
     # Initalize authentication document and ensure it resets on exit
